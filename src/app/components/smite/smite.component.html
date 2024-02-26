@@ -1,0 +1,27 @@
+<div class="back">
+  <div class="life-bar" >
+    <div class="life" [style.width]="currentLife / 120 + '%'">
+      <p class="life-points">{{ currentLife }}</p>
+    </div>
+  </div>
+  <p id="smite-dmg">1200</p>
+  <button (click)="smite()" [disabled]="disableSmite" class="smite-button">Smite</button><br>
+    <div class="keys">
+      <i class="fa-solid fa-computer-mouse"></i>
+      <div><p>D</p></div>
+      <div><p>F</p></div>
+      <div><p>Space</p></div>
+    </div>
+
+    @if(message !== ''){
+      <p [classList]="message === 'Congratz, you did it!' ? 'message winner' : 'message loser'"> {{ message }}</p>
+    }
+
+    @if(!disableButton){
+      <button (click)="reset(); startGame()" [disabled]="disableButton" class="start-btn">Play Again</button>
+    }
+
+    <a routerLink="/" routerLinkActive="active" class="change-mode-btn">Change gamemode</a>
+
+</div>
+

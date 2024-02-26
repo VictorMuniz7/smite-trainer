@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Asap', sans-serif;
+}
+
+:root{
+
+  .back{
+    width: 100%;
+    height: 100vh;
+    background: url('/assets/bg.jpg');
+    background-position: center;
+    background-size: cover;
+  }
+
+  .start-btn{
+    font-size: 2.5em;
+    background: rgb(126,44,156);
+    background: linear-gradient(135deg, rgba(126,44,156,1) 28%, rgba(136,206,215,1) 73%);
+    background-size: 120% 120%;
+    text-decoration: none;
+    color: white;
+    border: .1em solid white;
+    border-radius: .2em;
+    padding: .1em 1.8em;
+    cursor: pointer;
+
+    &:hover{
+      animation: btnAnimation 1s linear infinite;
+    }
+  }
+
+
+@keyframes btnAnimation {
+
+  0%{
+    background-position:0% 53%
+  }
+
+  50%{
+    background-position:100% 48%
+  }
+
+  100%{
+    background-position:0% 53%
+  }
+}
+}

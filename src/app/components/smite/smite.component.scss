@@ -1,0 +1,184 @@
+.back{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.life-bar{
+  width: 90%;
+  height: 2.5em;
+  border: .3em solid white;
+  margin: 2em 0;
+  position: relative;
+}
+
+.life{
+  height: 100%;
+  background-color: #FF3D3D;
+}
+
+.life-points{
+  position: absolute;
+  font-size: 1.5em;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#smite-dmg{
+  color: white;
+  font-size: 2em;
+}
+
+.smite-button{
+  width: 4em;
+  height: 4em;
+  background: url(../../../assets/smite-icon.webp);
+  background-size: cover;
+  border: .15em solid white;
+  font-size: 2em;
+  color: white;
+  -webkit-text-stroke: 1px black;
+  font-family: 'Righteous', sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+  position: relative;
+
+  &:active:enabled{
+    transform: scale(0.9);
+  }
+
+  &:disabled{
+    filter: grayscale(100);
+    cursor: auto;
+  }
+}
+
+.keys{
+  width: 80%;
+  height: 4em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+
+  i{
+    font-size: 1.8em;
+  }
+
+  div{
+    width: 2em;
+    border: .1em solid white;
+    padding: .1em .2em;
+
+    p{
+      font-size: 1.8em;
+      text-align: center;
+    }
+
+    &:last-child{
+      width: 6em;
+    }
+  }
+}
+
+.start-btn{
+  font-size: 1.8em;
+  margin: 1.5em 0;
+}
+
+.message{
+  font-size: 1.5em;
+  color: white;
+  margin-top: .6em;
+  padding: .2em .8em;
+  border-radius: 1em;
+}
+
+.loser{
+  background: rgb(247,120,120);
+  background: linear-gradient(135deg, rgba(247,120,120,1) 25%, rgba(242,34,34,1) 50%, rgba(247,120,120,1) 75%);
+}
+
+.winner{
+  background: rgb(103,214,128);
+  background: linear-gradient(135deg, rgba(103,214,128,1) 25%, rgba(12,136,24,1) 50%, rgba(103,214,128,1) 75%);
+}
+
+.change-mode-btn{
+  position: absolute;
+  bottom: 3em;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  padding: .6em 1.2em;
+  font-size: 1.6em;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@media screen and (min-width: 43em){
+
+  .keys{
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 65em){
+
+  .life-bar{
+    height: 3.5em;
+  }
+
+  .life-points{
+    font-size: 2em;
+  }
+
+  .smite-button{
+    font-size: 2.3em;
+  }
+
+  .keys{
+
+    i{
+      font-size: 2.5em;
+    }
+
+    div{
+      width: 3em;
+
+      p{
+        font-size: 2.5em;
+      }
+
+      &:last-child{
+        width: 8em;
+      }
+    }
+  }
+
+  .message{
+    font-size: 2em;
+    padding: .3em 1.5em;
+  }
+
+  .start-btn{
+    font-size: 2em;
+  }
+}
+
+@media screen and (min-width: 75em){
+
+  .life-bar{
+    width: 60%;
+  }
+
+  .keys{
+    width: 30%;
+  }
+}

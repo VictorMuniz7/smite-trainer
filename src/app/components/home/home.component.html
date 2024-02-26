@@ -1,0 +1,32 @@
+<div class="back">
+  <header>
+    <h1>Smite <i class="fa-solid fa-bolt"></i> Trainer</h1>
+  </header>
+  <div class="container">
+    <form class="options" [formGroup]="optionForm">
+      <div class="option">
+        <div class="box">
+          <input type="radio" name="gamemode" id="normal" value="normal" formControlName="gamemode">
+          <label for="normal"><span></span> Normal mode</label>
+          <i>⚡</i>
+        </div>
+        <p>In normal mode, life decreases normally, only testing reaction time.</p>
+      </div>
+      <div class="option">
+        <div class="box">
+          <input type="radio" name="gamemode" id="contest" value="contest" formControlName="gamemode">
+          <label for="contest"><span></span> Contest mode</label>
+          <i>⚔️</i>
+        </div>
+        <p>In contest mode, a smite contest is simulated against the enemy jungler.</p>
+      </div>
+    </form>
+
+    <a [routerLink]="['/smite', optionForm.value]" routerLinkActive="active" class="start-btn">Start</a>
+  </div>
+
+  <footer>
+    <a href="https://github.com/VictorMuniz7" target="_blank"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/victor-muniz-236842267/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+  </footer>
+</div>
