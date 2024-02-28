@@ -103,6 +103,7 @@ export class SmiteComponent implements OnInit{
   }
 
   reset(){
+    this.wins = false
     this.currentLife = 8000
     this.message = ''
     clearInterval(this.interval)
