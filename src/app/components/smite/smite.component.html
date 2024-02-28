@@ -1,6 +1,6 @@
 <div class="back">
   <div class="life-bar" >
-    <div class="life" [style.width]="currentLife / 120 + '%'">
+    <div class="life" [style.width]="currentLife / 80 + '%'">
       <p class="life-points">{{ currentLife }}</p>
     </div>
   </div>
@@ -14,7 +14,7 @@
     </div>
 
     @if(message !== ''){
-      <p [classList]="message === 'Congratz, you did it!' ? 'message winner' : 'message loser'"> {{ message }}</p>
+      <p [classList]="wins ? 'message winner' : 'message loser'"> {{ message }}</p>
     }
 
     @if(!disableButton){

@@ -35,7 +35,7 @@
 .smite-button{
   width: 4em;
   height: 4em;
-  background: url(../../../assets/smite-icon.webp);
+  background: url(../../../assets/images/smite-icon.webp);
   background-size: cover;
   border: .15em solid white;
   font-size: 2em;
@@ -56,33 +56,6 @@
   }
 }
 
-.keys{
-  width: 80%;
-  height: 4em;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
-
-  i{
-    font-size: 1.8em;
-  }
-
-  div{
-    width: 2em;
-    border: .1em solid white;
-    padding: .1em .2em;
-
-    p{
-      font-size: 1.8em;
-      text-align: center;
-    }
-
-    &:last-child{
-      width: 6em;
-    }
-  }
-}
 
 .start-btn{
   font-size: 1.8em;
@@ -90,11 +63,16 @@
 }
 
 .message{
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: white;
   margin-top: .6em;
   padding: .2em .8em;
   border-radius: 1em;
+  text-align: center;
+}
+
+.keys{
+  display: none;
 }
 
 .loser{
@@ -122,13 +100,6 @@
   }
 }
 
-@media screen and (min-width: 43em){
-
-  .keys{
-    width: 45%;
-  }
-}
-
 @media screen and (min-width: 65em){
 
   .life-bar{
@@ -144,6 +115,12 @@
   }
 
   .keys{
+    width: 40%;
+    height: 4em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
 
     i{
       font-size: 2.5em;
@@ -151,9 +128,12 @@
 
     div{
       width: 3em;
+      border: .1em solid white;
+      padding: .1em .2em;
 
       p{
         font-size: 2.5em;
+        text-align: center;
       }
 
       &:last-child{

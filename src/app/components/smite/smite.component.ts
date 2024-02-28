@@ -17,10 +17,15 @@ export class SmiteComponent implements OnInit{
     this.smite()
   }
 
-  currentLife: number = 12000;
+  currentLife: number = 8000;
+  lifeLeft: number = 0;
+
+  score: string = ''
 
   interval: any;
   timeout: any;
+
+  wins: boolean = false
 
   gamemode: string = 'normal'
 
@@ -66,33 +71,39 @@ export class SmiteComponent implements OnInit{
   }
 
   smite(){
-    this.playSound()
+    this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/smite-sound.mp3', 0.7)
     clearTimeout(this.timeout)
     clearInterval(this.interval)
     this.disableButton = false
     this.disableSmite = true
     if(this.currentLife > 0){
+      this.lifeLeft = this.currentLife - 1200
       this.currentLife -= 1200;
       if(this.currentLife <= 0){
+        this.score = 100 - (Math.floor(((this.lifeLeft * -1) / 1200) * 100)) + '%'
         this.currentLife = 0
       }
     }
     if(this.currentLife <= 0){
-      this.message = 'Congratz, you did it!'
+      this.wins = true
+      this.message = 'Congratz, you did it! SCORE = ' + this.score
+      this.playSound(`https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/objective-dying-${Math.floor(Math.random() * (2 - 1 + 1)) + 1}.mp3`, 0.3)
     }
     else{
+      this.wins = false
       this.message = this.missedMessage()
+      this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/pings-sound-effect.mp3', 0.7)
     }
   }
 
-  playSound(){
-    const audio = new Audio('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/smite-sound.mp3')
-    audio.volume = 0.3
-    audio.play();
+  playSound(path: string, volume: number){
+    const audio = new Audio(path)
+    audio.volume = volume
+    audio.play()
   }
 
   reset(){
-    this.currentLife = 12000
+    this.currentLife = 8000
     this.message = ''
     clearInterval(this.interval)
   }
