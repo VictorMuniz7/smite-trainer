@@ -1,11 +1,11 @@
 <div class="back">
   <div class="life-bar" >
-    <div class="life" [style.width]="currentLife / 80 + '%'">
+    <div class="life" [style.width]="currentLife / (smiteDamage / 12) + '%'">
       <p class="life-points">{{ currentLife }}</p>
     </div>
   </div>
-  <p id="smite-dmg">1200</p>
-  <button (click)="smite()" [disabled]="disableSmite" class="smite-button">Smite</button><br>
+  <p id="smite-dmg">{{smiteDamage}}</p>
+  <button (click)="smite()" [disabled]="disableSmite" class="smite-button" [style.background]="'url(./assets/images/smite-' + smiteDamage + '.webp) center / cover'">Smite</button><br>
     <div class="keys">
       <i class="fa-solid fa-computer-mouse"></i>
       <div><p>D</p></div>

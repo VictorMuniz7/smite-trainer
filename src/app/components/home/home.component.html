@@ -20,9 +20,23 @@
         </div>
         <p>In contest mode, a smite contest is simulated against the enemy jungler.</p>
       </div>
+      <div class="smite-dmg">
+        <div class="smite normal-smite">
+          <input type="radio" name="smite" id="600" value="600" formControlName="smite">
+          <label for="600"><span></span> 600</label>
+        </div>
+        <div class="smite unleashed-smite">
+          <input type="radio" name="smite" id="900" value="900" formControlName="smite">
+          <label for="900"><span></span> 900</label>
+        </div>
+        <div class="smite primal-smite">
+          <input type="radio" name="smite" id="1200" value="1200" formControlName="smite">
+          <label for="1200"><span></span> 1200</label>
+        </div>
+      </div>
     </form>
 
-    <a [routerLink]="['/smite', optionForm.value]" routerLinkActive="active" class="start-btn">Start</a>
+    <a routerLink="smite" routerLinkActive="active" class="start-btn" (click)="sendData()">Start</a>
   </div>
 
   <footer>

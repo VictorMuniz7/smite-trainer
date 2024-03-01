@@ -16,7 +16,7 @@
   }
 
   .start-btn{
-    font-size: 2.5em;
+    font-size: 1.8em;
     background: rgb(126,44,156);
     background: linear-gradient(135deg, rgba(126,44,156,1) 28%, rgba(136,206,215,1) 73%);
     background-size: 120% 120%;
@@ -45,6 +45,14 @@
 
   100%{
     background-position:0% 53%
+  }
+}
+
+
+@media screen and (min-width: 43em){
+
+  .start-btn{
+    font-size: 2.5em;
   }
 }
 }

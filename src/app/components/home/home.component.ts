@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { OptionsService } from '../../services/options.service';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,14 @@ export class HomeComponent {
 
   formBuilder = inject(FormBuilder)
   optionForm = this.formBuilder.group({
-    gamemode: ['normal']
+    gamemode: 'normal',
+    smite: '600'
   })
 
-  option: boolean = false
+  private optionsService = inject(OptionsService)
+
+  sendData(){
+    this.optionsService.changeOption(this.optionForm.value)
+  }
 
 }
