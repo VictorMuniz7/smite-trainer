@@ -13,8 +13,11 @@
   position: relative;
 }
 
-.life{
+.life, .fog-life{
   height: 100%;
+}
+
+.life{
   background-color: #FF3D3D;
 }
 
@@ -27,12 +30,23 @@
   transform: translate(-50%, -50%);
 }
 
+.fog-life{
+  background-color: #620F0F;
+}
+
 #smite-dmg{
+  width: 100%;
+  text-align: center;
   color: white;
   font-size: 2em;
 }
 
-.smite-button{
+.flash-smite{
+  display: flex;
+  gap: 1em;
+}
+
+.smite-button,.vision-button{
   width: 4em;
   height: 4em;
   border: .15em solid white;
@@ -54,6 +68,10 @@
   }
 }
 
+.vision-button{
+  background: url('../../../assets/images/flash.webp');
+  background-size: cover;
+}
 
 .start-btn{
   font-size: 1.8em;
@@ -108,12 +126,12 @@
     font-size: 2em;
   }
 
-  .smite-button{
+  .smite-button, .vision-button{
     font-size: 2.3em;
   }
 
-  .keys{
-    width: 40%;
+  .keys, .fog-keys{
+    width: 35%;
     height: 4em;
     display: flex;
     justify-content: space-around;
@@ -139,6 +157,18 @@
       }
     }
   }
+
+  .fog-keys{
+    width: 20em;
+
+    div{
+      &:last-child{
+        width: 3em;
+      }
+    }
+
+  }
+
 
   .message{
     font-size: 2em;

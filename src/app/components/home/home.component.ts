@@ -15,7 +15,8 @@ export class HomeComponent {
   formBuilder = inject(FormBuilder)
   optionForm = this.formBuilder.group({
     gamemode: 'normal',
-    smite: '600'
+    smite: '600',
+    fog: false
   })
 
   private optionsService = inject(OptionsService)

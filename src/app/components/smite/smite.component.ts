@@ -11,6 +11,14 @@ import { OptionsService } from '../../services/options.service';
 })
 export class SmiteComponent implements OnInit{
   @HostListener('document:keydown.f', ['$event'])
+  handleF(){
+    if(this.fogMode){
+      if(!this.disableFlash)
+      this.getVision()
+    } else {
+      this.handleKeyboardEvent()
+    }
+  }
   @HostListener('document:keydown.d', ['$event'])
   @HostListener('document:keydown.space', ['$event'])
   handleKeyboardEvent() {
@@ -27,14 +35,19 @@ export class SmiteComponent implements OnInit{
 
   interval: any;
   timeout: any;
+  flashTimeout: any;
 
   wins: boolean = false
 
   gamemode: string = ''
   smiteDamage: number = 0
+  fogMode: boolean = false
+
+  noVision: boolean = true
 
   disableButton: boolean = false
   disableSmite: boolean = true
+  disableFlash: boolean = true
 
   message: string = ''
 
@@ -45,7 +58,13 @@ export class SmiteComponent implements OnInit{
       if(option){
         this.gamemode = option.gamemode
         this.smiteDamage = Number(option.smite)
-        this.currentLife = this.roundLife(this.smiteDamage * 8.3)
+        this.fogMode = option.fog
+        this.noVision = option.fog
+        if(this.fogMode){
+          this.currentLife = Math.floor(Math.random() * (this.roundLife(this.smiteDamage * 8.3) - this.smiteDamage * 4) + this.smiteDamage * 3)
+        }else{
+          this.currentLife = this.roundLife(this.smiteDamage * 8.3)
+        }
         this.startGame()
       } else {
         this.route.navigate([''])
@@ -54,7 +73,13 @@ export class SmiteComponent implements OnInit{
   }
 
   startGame(){
-    this.disableSmite = false
+    if(this.fogMode){
+      this.currentLife = Math.floor(Math.random() * (this.roundLife(this.smiteDamage * 8.3) - this.smiteDamage * 4) + this.smiteDamage * 3)
+    }
+    if(!this.fogMode){
+      this.disableSmite = false
+    }
+    this.disableFlash = false
     this.disableButton = true
     this.interval = setInterval(() => {
       if(this.currentLife > 0){
@@ -71,6 +96,7 @@ export class SmiteComponent implements OnInit{
         this.currentLife = 0
         clearInterval(this.interval)
         this.disableSmite = true
+        this.disableFlash = true
         this.disableButton = false
       }
     }, 200)
@@ -80,6 +106,7 @@ export class SmiteComponent implements OnInit{
     this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/smite-sound.mp3', 0.7)
     clearTimeout(this.timeout)
     clearInterval(this.interval)
+    clearTimeout(this.flashTimeout)
     this.disableButton = false
     this.disableSmite = true
     if(this.currentLife > 0){
@@ -99,6 +126,18 @@ export class SmiteComponent implements OnInit{
     }
   }
 
+  getVision(){
+    this.disableFlash = true
+    this.disableSmite = false
+    this.noVision = false
+    this.playSound('../../../assets/sound-effects/flash-sound.mp3', 0.5)
+    this.flashTimeout = setTimeout(() => {
+      this.lose()
+      clearInterval(this.interval)
+      this.disableSmite = true
+    }, 2000)
+  }
+
   playSound(path: string, volume: number){
     const audio = new Audio(path)
     audio.volume = volume
@@ -108,15 +147,20 @@ export class SmiteComponent implements OnInit{
   lose(){
     this.wins = false
     this.message = this.missedMessage()
+    this.disableButton = false
     this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/pings-sound-effect.mp3', 0.7)
   }
 
   reset(){
+    if(this.fogMode){
+      this.noVision = true
+    }
     this.wins = false
     this.currentLife = this.roundLife(this.smiteDamage * 8.3)
     this.message = ''
     clearInterval(this.interval)
     clearTimeout(this.timeout)
+    clearTimeout(this.flashTimeout)
   }
 
   missedMessage(){

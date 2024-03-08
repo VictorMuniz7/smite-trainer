@@ -1,17 +1,43 @@
 <div class="back">
   <div class="life-bar" >
-    <div class="life" [style.width]="currentLife / (smiteDamage / 12) + '%'">
-      <p class="life-points">{{ currentLife }}</p>
-    </div>
+    @if (noVision) {
+      <div class="fog-life">
+        <p class="life-points"><i class="fa-solid fa-eye-slash"></i></p>
+      </div>
+    } @else {
+      <div class="life" [style.width]="currentLife / (smiteDamage / 12) + '%'">
+        <p class="life-points">{{ currentLife }}</p>
+      </div>
+    }
   </div>
-  <p id="smite-dmg">{{smiteDamage}}</p>
-  <button (click)="smite()" [disabled]="disableSmite" class="smite-button" [style.background]="'url(./assets/images/smite-' + smiteDamage + '.webp) center / cover'">Smite</button><br>
-    <div class="keys">
-      <i class="fa-solid fa-computer-mouse"></i>
-      <div><p>D</p></div>
-      <div><p>F</p></div>
-      <div><p>Space</p></div>
+  <div class="flash-smite">
+    <div>
+      <p id="smite-dmg">{{smiteDamage}}</p>
+      <button (click)="smite()" [disabled]="disableSmite" class="smite-button" [style.background]="'url(./assets/images/smite-' + smiteDamage + '.webp) center / cover'">Smite</button><br>
     </div>
+
+    @if (fogMode) {
+      <div>
+        <p id="smite-dmg">Vision</p>
+        <button (click)="getVision()" [disabled]="disableFlash" class="vision-button" >Flash</button>
+      </div>
+    }
+  </div>
+
+    @if (fogMode) {
+      <div class="fog-keys">
+        <div><p>D</p></div>
+        <div><p>F</p></div>
+      </div>
+    } @else {
+      <div class="keys">
+        <i class="fa-solid fa-computer-mouse"></i>
+        <div><p>D</p></div>
+        <div><p>F</p></div>
+        <div><p class="space">Space</p></div>
+      </div>
+    }
+
 
     @if(message !== ''){
       <p [classList]="wins ? 'message winner' : 'message loser'"> {{ message }}</p>
