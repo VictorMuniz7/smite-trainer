@@ -130,7 +130,7 @@ export class SmiteComponent implements OnInit{
     this.disableFlash = true
     this.disableSmite = false
     this.noVision = false
-    this.playSound('../../../assets/sound-effects/flash-sound.mp3', 0.5)
+    this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/flash-sound.mp3', 0.5)
     this.flashTimeout = setTimeout(() => {
       this.lose()
       clearInterval(this.interval)
