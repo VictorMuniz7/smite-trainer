@@ -36,6 +36,7 @@ export class SmiteComponent implements OnInit{
   interval: any;
   timeout: any;
   flashTimeout: any;
+  visionTimeout: any;
 
   wins: boolean = false
 
@@ -43,7 +44,7 @@ export class SmiteComponent implements OnInit{
   smiteDamage: number = 0
   fogMode: boolean = false
 
-  noVision: boolean = true
+  noVision: boolean = false
 
   disableButton: boolean = false
   disableSmite: boolean = true
@@ -59,7 +60,6 @@ export class SmiteComponent implements OnInit{
         this.gamemode = option.gamemode
         this.smiteDamage = Number(option.smite)
         this.fogMode = option.fog
-        this.noVision = option.fog
         if(this.fogMode){
           this.currentLife = Math.floor(Math.random() * (this.roundLife(this.smiteDamage * 8.3) - this.smiteDamage * 4) + this.smiteDamage * 3)
         }else{
@@ -75,11 +75,15 @@ export class SmiteComponent implements OnInit{
   startGame(){
     if(this.fogMode){
       this.currentLife = Math.floor(Math.random() * (this.roundLife(this.smiteDamage * 8.3) - this.smiteDamage * 4) + this.smiteDamage * 3)
+      this.disableFlash = true
+      this.visionTimeout = setTimeout(() => {
+      this.noVision = true
+      this.disableFlash = false
+      }, 1000)
     }
     if(!this.fogMode){
       this.disableSmite = false
     }
-    this.disableFlash = false
     this.disableButton = true
     this.interval = setInterval(() => {
       if(this.currentLife > 0){
@@ -88,8 +92,9 @@ export class SmiteComponent implements OnInit{
       if(this.gamemode == 'contest' && this.currentLife <= (this.smiteDamage + 200)){
         this.timeout = setTimeout(() => {
           this.currentLife -= this.smiteDamage;
+          if(this.currentLife < 0)
           this.currentLife = 0;
-        }, 100)
+        }, 200)
       }
       if(this.currentLife <= 0){
         this.message = this.missedMessage()
@@ -103,7 +108,7 @@ export class SmiteComponent implements OnInit{
   }
 
   smite(){
-    this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/smite-sound.mp3', 0.7)
+    this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/smite-sound.mp3', 0.6)
     clearTimeout(this.timeout)
     clearInterval(this.interval)
     clearTimeout(this.flashTimeout)
@@ -130,12 +135,12 @@ export class SmiteComponent implements OnInit{
     this.disableFlash = true
     this.disableSmite = false
     this.noVision = false
-    this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/flash-sound.mp3', 0.5)
+    this.playSound('https://raw.githubusercontent.com/VictorMuniz7/smite-trainer/main/src/assets/sound-effects/flash-sound.mp3', 0.3)
     this.flashTimeout = setTimeout(() => {
       this.lose()
       clearInterval(this.interval)
       this.disableSmite = true
-    }, 2000)
+    }, 1200)
   }
 
   playSound(path: string, volume: number){
@@ -152,15 +157,14 @@ export class SmiteComponent implements OnInit{
   }
 
   reset(){
-    if(this.fogMode){
-      this.noVision = true
-    }
     this.wins = false
     this.currentLife = this.roundLife(this.smiteDamage * 8.3)
     this.message = ''
+    this.noVision = false
     clearInterval(this.interval)
     clearTimeout(this.timeout)
     clearTimeout(this.flashTimeout)
+    clearTimeout(this.visionTimeout)
   }
 
   missedMessage(){
